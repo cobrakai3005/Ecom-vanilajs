@@ -1,0 +1,244 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop</title>
+    <link rel="shortcut icon" href="https://fakestoreapi.com/icons/logo.png" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="
+https://cdn.jsdelivr.net/npm/sweetalert2@11.22.2/dist/sweetalert2.all.min.js
+"></script>
+    <link href="
+https://cdn.jsdelivr.net/npm/sweetalert2@11.22.2/dist/sweetalert2.min.css
+" rel="stylesheet">
+</head>
+
+<body>
+    <div class="w-full min-h-screen bg-zinc-100  flex flex-col gap-10">
+        <nav class="w-full h-24  bg-white px-3 flex flex-col md:flex-row justify-between items-center">
+            <div class="flex gap-4 items-center justify-start">
+                <img class="w-10" src="https://fakestoreapi.com/icons/logo.png" alt="">
+                <h4 class="text-4xl font-bold text-[#802c6e]">ShopBaby</h4>
+            </div>
+            <div
+                class="links w-[80%] md:w-[40%] flex justify-center gap-10 items-center text-lg font-medium text-zinc-600 ">
+                <a href="./index.html">Home</a>
+                <a href="./Products.html">Shop</a>
+                <a href="#">Contact us</a>
+                <a href="./Cart.html">
+                    <i class="ri-shopping-cart-fill"></i>
+                    <span id="cart-count">0</span>
+                </a>
+                <a href="#" id="account"></a>
+
+            </div>
+        </nav>
+
+        <div class="max-w-[1200px] w-full  mx-auto p-2 flex flex-col gap-10  py-24 bg-white  px-16">
+
+            <h1 class="text-[90px] text-zinc-600  font-extrabold">Shop</h1>
+
+            <div class="filters flex gap-5 flex-col md:flex-row justify-between items-center">
+
+                <input type="text" id="input" placeholder="Search Products"
+                    class="px-3 py-2 border-[1px] md:w-[250px] border-zinc-400/20">
+
+                <div>
+                    <select name="sort" id="sort"
+                        class="border-[1px] border-zinc-700/40 rounded-md py-2 px-4 text-md font-bold">
+                        <option value="">Choose Your Options</option>
+                        <option value="asc">Sort By Price Low to High</option>
+                        <option value="dsc">Sort By Price High to Low</option>
+                        <option value="rating-asc">Sort By Rating Low to High</option>
+                        <option value="rating-dsc">Sort By Rating High to Low</option>
+
+                    </select>
+                    <select name="displayType" id="display"
+                        class="border-[1px] rounded-md border-zinc-700/40 py-2 px-4 text-md font-bold">
+                        <option value="">Display Style</option>
+                        <option value="grid"> <i class="ri-list-unordered"></i><i class="ri-layout-grid-2-line"></i>Grid
+                        </option>
+                        <option value="list">List</option>
+
+
+                    </select>
+                </div>
+            </div>
+
+            <div id="products-wrapper" class="">
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+
+
+<script>
+    let displayType = localStorage.getItem("display") || "grid"
+    const accountLink = document.getElementById('account')
+    const loggedInUser = JSON.parse(localStorage.getItem('logged-in-user'))
+    const wrapper = document.querySelector('#products-wrapper');
+    const inputEl = document.querySelector("#input")
+    const selectEl = document.querySelector('select')
+    const cartEl = document.querySelector('#cart-count')
+    const displayEl = document.querySelector('#display')
+
+    if (loggedInUser) {
+        accountLink.innerText = `${loggedInUser.name}`
+        accountLink.setAttribute('href', "http://127.0.0.1:5500/src/Account.html")
+    } else {
+        accountLink.innerText = "Log-in"
+        accountLink.setAttribute('href', "http://127.0.0.1:5500/src/Login.html")
+    }
+
+
+    let allProducts = []
+    let cartProducts = JSON.parse(localStorage.getItem('cart-items')) || []
+
+    refreshCart()
+    //Fetch Products
+    const fetchProducts = async () => {
+        const res = await fetch("https://fakestoreapi.com/products");
+        const products = await res.json()
+        allProducts = products;
+        displayProducts(products);
+    }
+    fetchProducts()
+
+
+    //Display Products
+    function displayProducts(products) {
+        let displayType = localStorage.getItem("display")
+        wrapper.innerText = ""
+        if (displayType === "grid") {
+            wrapper.className = "gap-10 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4"
+        } else if (displayType === 'list') {
+            wrapper.className = ""
+        }
+        products.forEach(product => {
+            const div = document.createElement('div');
+            div.id = "product"
+            if (displayType === "list") {
+                div.className = "flex"
+            }
+            div.innerHTML += `
+            
+                    <img class=" h-[230px] object-contain transition-transform duration-200 hover:scale-110"
+                        src="${product.image}" alt="">
+                    <div class="p-4 text-sm flex flex-col gap-2">
+                        <h1 class="text-[16px] font-semibold text-zinc-600">${product.title}</h1>
+                        <p class="star text-md font-bold">⭐⭐${product.rating.rate}</p>
+                        <p class="text-sm font-semibold">$ ${product.price}</p>
+                    </div>
+         
+                `
+            const btnDivs = document.createElement('div')
+            btnDivs.className = "flex justify-between items-center gap-4 text-sm font-bold text-zinc-700/60";
+            const addToCartButton = document.createElement('button');
+            addToCartButton.className = "add-to-cart-btn rounded-md text-text-zinc-700 cursor-pointer bg-zinc-400 hover:scale-105 hover:bg-blue-500/40 transition-transform duration-300 focus:scale-95 "
+            addToCartButton.innerText = "Add To Cart"
+            addToCartButton.addEventListener("click", () => {
+                addToCart(product)
+            })
+            const view = document.createElement('button');
+            view.className = "add-to-cart-btn rounded-md text-zinc-100 cursor-pointer bg-[#802c6e] hover:scale-105 hover:bg-blue-500/40 transition-transform duration-300 focus:scale-95 "
+            view.innerText = "View more"
+            view.addEventListener("click", () => {
+                localStorage.setItem('selected-item', JSON.stringify(product))
+                window.location.replace("http://127.0.0.1:5500/src/Product.html")
+            })
+            btnDivs.append(addToCartButton, view)
+            div.append(btnDivs)
+            wrapper.append(div)
+        })
+
+
+    }
+
+
+    //Search Functionality
+    inputEl.addEventListener("input", () => {
+        const query = input.value.toLowerCase();
+        const filtered = allProducts.filter(product => {
+            return product.title.toLowerCase().includes(query);
+        })
+        displayProducts(filtered);
+
+    })
+
+    //Sort Functionality
+    selectEl.addEventListener("change", () => {
+        const changeValue = selectEl.value;
+        switch (changeValue) {
+            case "asc":
+                const asc = allProducts.sort((a, b) => a.price - b.price);
+                displayProducts(asc)
+                break;
+            case "dsc":
+                const dsc = allProducts.sort((b, a) => a.price - b.price);
+                displayProducts(dsc)
+                break;
+            case "rating-asc":
+                const ratingAsc = allProducts.sort((a, b) => a.rating.rate - b.rating.rate);
+                displayProducts(ratingAsc)
+                break;
+            case "rating-dsc":
+                const ratingDsc = allProducts.sort((b, a) => a.rating.rate - b.rating.rate);
+                displayProducts(ratingDsc)
+                break;
+
+            default:
+                break;
+        }
+    })
+
+    console.log(displayEl);
+    //Display Functionality
+    displayEl.addEventListener('change', () => {
+        if (displayEl.value === "grid") {
+            localStorage.setItem('display', "grid")
+        } else {
+            localStorage.setItem('display', "list")
+
+        }
+        displayProducts(allProducts)
+    })
+    function addToCart(product) {
+        if (loggedInUser) {
+            cartProducts.push(product);
+            localStorage.setItem('cart-items', JSON.stringify(cartProducts));
+            refreshCart()
+            swal.fire({
+                icon: "success",
+                showCancelButton: false,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Added  to Cart"
+            }).then((result) => {
+
+            });
+        } else {
+            swal.fire({
+                icon: "error",
+                showCancelButton: false,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Please Login first"
+            }).then((result) => {
+
+            });
+        }
+    }
+
+    function refreshCart() {
+        let updatedCart = JSON.parse(localStorage.getItem('cart-items')) || []
+        cartEl.innerText = `${updatedCart.length}`
+    }
+
+
+
+</script>

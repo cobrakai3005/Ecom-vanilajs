@@ -1,0 +1,191 @@
+<!-- https://websitedemos.net/store-04/wp-content/uploads/sites/157/2020/05/lookbook-banner.jpg -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home </title>
+    <link rel="shortcut icon" href="https://fakestoreapi.com/icons/logo.png" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+  
+    <script src="
+https://cdn.jsdelivr.net/npm/sweetalert2@11.22.2/dist/sweetalert2.all.min.js
+"></script>
+    <link href="
+https://cdn.jsdelivr.net/npm/sweetalert2@11.22.2/dist/sweetalert2.min.css
+" rel="stylesheet">
+</head>
+
+<body>
+    <div class="w-full min-h-screen relative flex flex-col gap-4 justify-center items-center">
+        <img class="w-full h-screen object-cover  "
+            src="https://websitedemos.net/store-04/wp-content/uploads/sites/157/2020/05/lookbook-banner.jpg" alt="">
+        <div class="absolute inset-0 w-full h-screen   bg-zinc-700/60"></div>
+
+        <nav
+            class="absolute inset-0 w-full h-24 bg-transparent px-20 flex flex-col md:flex-row justify-between items-center">
+            <div class="flex gap-4 items-center justify-start">
+                <img class="w-10" src="https://fakestoreapi.com/icons/logo.png" alt="">
+                <a href="./index.html" class="text-4xl font-bold text-white">ShopBaby</a>
+            </div>
+            <div class="links w-[40%] flex justify-center gap-10 items-center text-lg font-medium text-white      ">
+                <a href="./index.html">Home</a>
+                <a href="./Products.html">Shop</a>
+                <!-- <a href="#">About Us</a>
+                <a href="#">Contact us</a> -->
+                <a id="login-link" href="./Login.html">
+                    Login
+                </a>
+            </div>
+        </nav>
+
+        <div class="z-20 top-[10%] absolute flex flex-col items-center justify-center gap-10">
+            <h1 class="text-[89px] text-white">Shop It Out</h1>
+            <p class="text-white text-[18px] w-[700px]">Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Recusandae,
+                expedita! Suscipit veniam soluta
+                magnam ipsum est deserunt consectetur at sint!</p>
+        </div>
+
+        <div class="grid grid-cols-2 gap-10 w-[80%]">
+            <div class=" bg-red-400 h-[500px] relative">
+                <img class="absolute  inset-0 w-full h-full object-cover"
+                    src="https://websitedemos.net/store-04/wp-content/uploads/sites/157/2020/05/men-collection.jpg"
+                    alt="">
+                <div class="absolute inset-0 w-full h-full bg-zinc-800/50 ">
+                    <div class="w-[80%] h-full mx-auto flex flex-col text-white  gap-7 justify-center items-center">
+
+                        <h1 class="text-5xl ">Winter for Men</h1>
+                        <p class="text-[17px] text-light leading-7">Lorem ipsum dolor sit amet consectetur adipisicing
+                            elit.
+                            Earum
+                            vitae ratione
+                            vero
+                            nam harum
+                            assumenda!</p>
+                        <a href="./Products.html"
+                            class="py-3 px-5 bg-white text-zinc-700 rounded  font-bold cursor-pointer">Check It
+                            Out</a>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-red-400 h-[500px] relative">
+                <img class="  absolute  inset-0 w-full h-full object-cover"
+                    src="https://websitedemos.net/store-04/wp-content/uploads/sites/157/2020/05/women-collection-1.jpg"
+                    alt="">
+                <div class="absolute inset-0 w-full h-full bg-zinc-800/50">
+                    <div class="w-[80%] h-full mx-auto flex flex-col text-white  gap-7 justify-center items-center">
+
+                        <h1 class="text-5xl ">Summer For Women</h1>
+                        <p class="text-[17px] text-light leading-7">Lorem ipsum dolor sit amet consectetur adipisicing
+                            elit.
+                            Earum
+                            vitae ratione
+                            vero
+                            nam harum
+                            assumenda!</p>
+                        <a href="./Products.html"
+                            class="py-3 px-5 bg-white text-zinc-700 rounded  font-bold cursor-pointer">Check It
+                            Out</a>
+                    </div>
+                </div>
+            </div>
+            <div class=" bg-red-400 h-[500px] relative col-span-2">
+                <img class=" absolute  inset-0 w-full h-full object-cover"
+                    src="https://websitedemos.net/store-04/wp-content/uploads/sites/157/2020/05/blazers.jpg" alt="">
+                <div class="absolute inset-0 w-full h-full bg-zinc-800/50">
+                    <div class="w-[80%] h-full mx-auto flex flex-col text-white  gap-7 justify-center items-center">
+
+                        <h1 class="text-5xl ">Blazer Collection</h1>
+                        <p class="text-[17px] text-light leading-7">Lorem ipsum dolor sit amet consectetur adipisicing
+                            elit.
+                            Earum
+                            vitae ratione
+                            vero
+                            nam harum
+                            assumenda!</p>
+                        <a href="./Products.html"
+                            class="py-3 px-5 bg-white text-zinc-700 rounded  font-bold cursor-pointer">Check It
+                            Out</a>
+                    </div>
+                </div>
+            </div>
+            <div class=" bg-red-400 h-[500px] relative">
+                <img class="absolute  inset-0 w-full h-full object-cover"
+                    src="https://websitedemos.net/store-04/wp-content/uploads/sites/157/2020/05/testimonial1.jpg"
+                    alt="">
+
+                <div class="absolute inset-0 w-full h-full bg-zinc-800/50">
+                    <div class="w-[80%] h-full mx-auto flex flex-col text-white  gap-7 justify-center items-center">
+
+                        <h1 class="text-5xl ">Women's Fashion Trends</h1>
+                        <p class="text-[17px] text-light leading-7">Lorem ipsum dolor sit amet consectetur adipisicing
+                            elit.
+                            Earum
+                            vitae ratione
+                            vero
+                            nam harum
+                            assumenda!</p>
+                        <a href="./Products.html"
+                            class="py-3 px-5 bg-white text-zinc-700 rounded  font-bold cursor-pointer">Check It
+                            Out</a>
+                    </div>
+                </div>
+            </div>
+            <div class=" bg-red-400 h-[500px] relative">
+                <img class="absolute  inset-0 w-full h-full object-cover"
+                    src="https://websitedemos.net/store-04/wp-content/uploads/sites/157/2020/05/testimonial2.jpg"
+                    alt="">
+                <div class="absolute inset-0 w-full h-full bg-zinc-800/50">
+                    <div class="w-[80%] h-full mx-auto flex flex-col text-white  gap-7 justify-center items-center">
+
+                        <h1 class="text-5xl ">Fall-Winter for women</h1>
+                        <p class="text-[17px] text-light leading-7">Lorem ipsum dolor sit amet consectetur adipisicing
+                            elit.
+                            Earum
+                            vitae ratione
+                            vero
+                            nam harum
+                            assumenda!</p>
+                        <a href="./Products.html"
+                            class="py-3 px-5 bg-white text-zinc-700 rounded  font-bold cursor-pointer">Check It
+                            Out</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <footer class="flex justify-around items-center py-16 px-10">
+        <p class="text-zinc-700">
+            Fall-Winter &copy; for women
+        </p>
+        <p class="flex justify-center items-center gap-5 cursor-pointer text-[22px] text-zinc-700">
+            <span><i class="ri-facebook-line"></i></span>
+            <span><i class="ri-instagram-line"></i></span>
+            <span><i class="ri-twitter-fill"></i></span>
+            <span><i class="ri-youtube-fill"></i></span>
+        </p>
+        <p>
+            Powered by Brand Name
+        </p>
+    </footer>
+    </div>
+</body>
+
+</html>
+
+<script>
+    const loginLink = document.getElementById('login-link');
+    const loggedInUser = JSON.parse(localStorage.getItem("logged-in-user"));
+    if (loggedInUser) {
+        loginLink.innerText = `${loggedInUser.name}`
+        loginLink.setAttribute("href", "./Account.html")
+    }
+</script>
